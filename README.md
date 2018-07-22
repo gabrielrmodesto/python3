@@ -1,6 +1,7 @@
 # Python3
 
 ## Jogos
+> O usuário pode escolher entre dois jogos
 
 > Jogo da advinhação
 ```
