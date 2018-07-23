@@ -6,7 +6,6 @@ def boas_vindas():
 	print("*********************************")
 
 def ler_palavra_secreta():
-	#leitura do arquivo
 	arquivo = open("palavras.txt", "r")
 	palavras = []
 	for linha in arquivo:
@@ -21,27 +20,41 @@ def ler_palavra_secreta():
 def inicializar_letras(palavra):
 	return ["_" for letra in palavra]
 
+def pede_chute():
+	chute = input("Digite uma letra ")
+	chute = chute.strip().upper()
+	return chute
+
+def chute_correto(chute,letras_acertadas,palavra_secreta):
+	posicao = 0
+	for letra in palavra_secreta:
+		if(chute == letra):
+			letras_acertadas[posicao] = letra
+		posicao = posicao + 1
+
+def mensagem_ganhador():
+	print("Voce ganhou")
+
+def mensagem_perdedor():
+	print("Voce perdeu")
+	
 def jogar():
 
 	boas_vindas()
 	palavra_secreta = ler_palavra_secreta()
+	
 	letras_acertadas = inicializar_letras(palavra_secreta)
+	print(letras_acertadas)
 
 	enforcou = False
 	acertou = False
 	erros = 0
 
-	print(letras_acertadas)
 	while(not enforcou and not acertou):
-		chute = input("Digite uma letra ")
-		chute = chute.strip().upper()
-
+		
+		chute = pede_chute()
 		if(chute in palavra_secreta):
-			posicao = 0
-			for letra in palavra_secreta:
-				if(chute == letra):
-					letras_acertadas[posicao] = letra
-				posicao = posicao + 1
+			chute_correto(chute,letras_acertadas,palavra_secreta)
 		else:
 			erros += 1
 
@@ -50,10 +63,9 @@ def jogar():
 		print(letras_acertadas)
 
 	if(acertou):
-		print("Voce ganhou")
+		mensagem_ganhador()
 	else:
-		print("Voce errou")
-	print("Fim de jogo")
+		mensagem_perdedor()
 
 if(__name__ == "__main__"):
 	jogar()
